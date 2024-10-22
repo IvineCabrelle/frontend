@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
-import './welcome.css'; // Assurez-vous de créer ce fichier CSS
+import './welcome.css'; 
 import { useLanguage } from './LanguageContext';
 
 const Welcome = ({ location }) => {
   const { state } = location || {};
   const name = state?.name || "Utilisateur";
   const lastName = state?.lastName || "";
-  const { language } = useLanguage(); // Utiliser le contexte
+  const { language } = useLanguage(); //  le contexte
   const [passengers, setPassengers] = useState(1);
   const [destination, setDestination] = useState(null);
   const [price, setPrice] = useState(0);

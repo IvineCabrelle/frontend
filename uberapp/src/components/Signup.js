@@ -1,10 +1,15 @@
 import React from 'react';
-import './Signup.css'; // Assurez-vous que le chemin est correct
+import { Link, useNavigate } from 'react-router-dom'; //  useNavigate
+import './Signup.css'; 
 
 const Signup = () => {
+  const navigate = useNavigate(); 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted");
+    // Redirigez vers la page de connexion après soumission
+    navigate('/login');
   };
 
   return (
@@ -105,6 +110,10 @@ const Signup = () => {
         >
           Submit
         </button>
+        
+        <Link to="/" className="login-link">
+          Accueil
+        </Link>
       </form>
     </div>
   );

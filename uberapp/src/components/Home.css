@@ -1,0 +1,67 @@
+/* src/components/Home.css */
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('./reserver.jpeg'); /* Chemin vers votre image */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Couche noire semi-transparente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+  }
+  
+  .welcome-title {
+    font-size: 3rem; /* Taille du titre */
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .welcome-subtitle {
+    font-size: 1.5rem; /* Taille du sous-titre */
+    margin-bottom: 2rem;
+  }
+  
+  .button-container {
+    display: flex;
+    gap: 1rem; /* Espace entre les boutons */
+  }
+  
+  .home-button {
+    padding: 1rem 2rem; /* Padding des boutons */
+    font-size: 1rem; /* Taille de la police */
+    font-weight: 600; /* Poids de la police */
+    border: none;
+    border-radius: 0.5rem; /* Coins arrondis */
+    cursor: pointer; /* Curseur pointer */
+    transition: background-color 0.3s; /* Transition pour le hover */
+  }
+  
+  .home-button:first-child {
+    background-color: #2563eb; /* Couleur pour le bouton Se connecter */
+    color: white;
+  }
+  
+  .home-button:last-child {
+    background-color: #3b82f6; /* Couleur pour le bouton S'inscrire */
+    color: white;
+  }
+  
+  .home-button:hover {
+    background-color: #1d4ed8; /* Couleur au hover */
+  }
+  

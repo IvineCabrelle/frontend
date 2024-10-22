@@ -1,14 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Header.css'; // Assurez-vous de créer ce fichier pour les styles
-import { useLanguage } from './LanguageContext';   // Importer le contexte
+import './Header.css'; 
+import { useLanguage } from './LanguageContext';   //  contexte
 
 const Header = () => {
   const navigate = useNavigate();
-  const { language, toggleLanguage } = useLanguage(); // Utiliser le contexte
+  const { language, toggleLanguage } = useLanguage(); //  le contexte
 
   const handleHomeClick = () => {
-    navigate('/'); // Rediriger vers la page d'accueil
+    navigate('/'); // Redirige vers la page d'accueil
   };
 
   const handleLoginClick = () => {

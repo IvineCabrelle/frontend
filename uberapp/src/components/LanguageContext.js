@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 
-// Créez un contexte de langue
+//  un contexte de langue
 const LanguageContext = createContext();
 
 // Fournisseur de contexte de langue

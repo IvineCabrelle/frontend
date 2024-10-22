@@ -4,12 +4,12 @@ import Header from './components/Header';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Home from './components/Home';
-import { LanguageProvider } from './components/LanguageContext'; // Importer le LanguageProvider
+import { LanguageProvider } from './components/LanguageContext'; //  LanguageProvider
 import Welcome from './components/welcome';
 
 const App = () => {
   return (
-    <LanguageProvider> {/* Envelopper l'application avec LanguageProvider */}
+    <LanguageProvider> {/* Envois de l'application avec LanguageProvider */}
       <Router>
         <Header />
         <Routes>

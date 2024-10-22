@@ -24,7 +24,7 @@ const Login = () => {
       if (response.ok) {
         const userData = await response.json();
         
-        // Redirigez vers la page de bienvenue avec les données de l'utilisateur
+        // Redirige vers la page de bienvenue avec les données de l'utilisateur
         navigate('/welcome', { state: { name: userData.firstName, lastName: userData.lastName } });
       } else {
         alert('Email ou mot de passe incorrect');

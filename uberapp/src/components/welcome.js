@@ -28,7 +28,7 @@ const Welcome = ({ location }) => {
   };
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: 'YOUR_GOOGLE_MAPS_API_KEY' // Remplacez par votre clé API
+    googleMapsApiKey: 'YOUR_GOOGLE_MAPS_API_KEY' //  clé API
   });
 
   const onMapClick = (event) => {

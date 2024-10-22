@@ -7,14 +7,30 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Login form submitted");
 
-    // Logique de connexion (vous pouvez remplacer ceci par votre propre logique d'authentification)
-    if (email && password) {
-      // Redirection vers la page de bienvenue (vous pouvez personnaliser cette logique)
-      navigate('/welcome', { state: { name: "VotreNom", lastName: "VotrePrénom" } });
+    // Envoi des données à l'API
+    try {
+      const response = await fetch('http://localhost:5000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        const userData = await response.json();
+        
+        // Redirigez vers la page de bienvenue avec les données de l'utilisateur
+        navigate('/welcome', { state: { name: userData.firstName, lastName: userData.lastName } });
+      } else {
+        alert('Email ou mot de passe incorrect');
+      }
+    } catch (error) {
+      console.error('Erreur:', error);
     }
   };
 
@@ -48,26 +64,9 @@ const Login = () => {
           />
         </div>
 
-        <div className="form-group checkbox-group">
-          <input
-            id="remember"
-            type="checkbox"
-            className="checkbox"
-          />
-          <label htmlFor="remember" className="checkbox-label">Se souvenir de moi</label>
-        </div>
-
-        <button
-          type="submit"
-          className="submit-button"
-        >
-          Soumettre
-        </button>
+        <button type="submit" className="submit-button">Soumettre</button>
 
         <p className="footer-text">
-          Déjà un compte? 
-          <Link to="/login" className="login-link">Se connecter</Link>
-          <br />
           Pas de compte? 
           <Link to="/signup" className="login-link">S'inscrire</Link>
         </p>

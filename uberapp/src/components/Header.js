@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Header.css'; // Assurez-vous de créer ce fichier pour les styles
-import { useLanguage } from './LanguageContext';  // Importer le contexte
+import { useLanguage } from './LanguageContext';   // Importer le contexte
 
 const Header = () => {
   const navigate = useNavigate();

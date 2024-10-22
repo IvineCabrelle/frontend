@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Ajoutez cette ligne pour importer Link
 import './Login.css'; // Assurez-vous que le chemin est correct
 
 const Login = () => {
@@ -51,9 +52,14 @@ const Login = () => {
 
         <p className="footer-text">
           Already have an account? 
-          <button onClick={() => {/* Logic to navigate to login */}} className="login-link">
+          <Link to="/login" className="login-link">
             Log In
-          </button>
+          </Link>
+          <span> | </span>
+          Don't have an account? 
+          <Link to="/signup" className="login-link">
+            Sign Up
+          </Link>
         </p>
       </form>
     </div>

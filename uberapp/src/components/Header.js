@@ -29,9 +29,7 @@ const Header = () => {
         UberApp
       </div>
       <div className="nav-links">
-        <button className="nav-button" onClick={handleHomeClick}>
-          {language === 'fr' ? 'Accueil' : 'Home'}
-        </button>
+        
         <button className="nav-button" onClick={handleLoginClick}>
           {language === 'fr' ? 'Se connecter' : 'Login'}
         </button>

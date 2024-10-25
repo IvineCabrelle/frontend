@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Signup.css';
 
@@ -9,8 +9,16 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phone, setPhone] = useState('');
-  const [company, setCompany] = useState('');
+  const [birthDate, setBirthDate] = useState('');
+  const [gender, setGender] = useState('');
+  const [maxDate, setMaxDate] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const today = new Date();
+    const formattedDate = today.toISOString().split('T')[0]; // Format YYYY-MM-DD
+    setMaxDate(formattedDate);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,14 +29,31 @@ const Signup = () => {
       return;
     }
 
-    // Envoi des données à l'API
+    // Calculer l'âge à partir de la date de naissance
+    const birthDateObject = new Date(birthDate);
+    const today = new Date();
+    const age = today.getFullYear() - birthDateObject.getFullYear();
+    const monthDiff = today.getMonth() - birthDateObject.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDateObject.getDate())) {
+      age--;
+    }
+
+    // Envoi des données à l'API dans l'ordre spécifié
     try {
-      const response = await fetch('http://localhost:5000/api/signup', {
+      const response = await fetch('http://localhost:5000/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ firstName, lastName, email, password, phone, company }),
+        body: JSON.stringify({
+          email: email,
+          pwd: password,
+          firstname: firstName,
+          lastname: lastName,
+          age: age,
+          sex: gender,
+          cell: phone,
+        }),
       });
 
       if (response.ok) {
@@ -45,31 +70,6 @@ const Signup = () => {
     <div className="signup-container">
       <form onSubmit={handleSubmit} className="signup-form">
         <h2 className="signup-title">Créer un compte</h2>
-
-        <div className="form-group">
-          <label htmlFor="floating_first_name" className="form-label">Prénom</label>
-          <input
-            type="text"
-            id="floating_first_name"
-            className="form-input"
-            placeholder="Prénom"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="floating_last_name" className="form-label">Nom de famille</label>
-          <input
-            type="text"
-            id="floating_last_name"
-            className="form-input"
-            placeholder="Nom de famille"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          />
-        </div>
 
         <div className="form-group">
           <label htmlFor="email" className="form-label">Email</label>
@@ -111,6 +111,32 @@ const Signup = () => {
         </div>
 
         <div className="form-group">
+          <label htmlFor="floating_first_name" className="form-label">Prénom</label>
+          <input
+            type="text"
+            id="floating_first_name"
+            className="form-input"
+            placeholder="Prénom"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="floating_last_name" className="form-label">Nom de famille</label>
+          <input
+            type="text"
+            id="floating_last_name"
+            className="form-input"
+            placeholder="Nom de famille"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
           <label htmlFor="floating_phone" className="form-label">Numéro de téléphone (123-456-7890)</label>
           <input
             type="tel"
@@ -125,16 +151,31 @@ const Signup = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="floating_company" className="form-label">Société (Ex. Google)</label>
+          <label htmlFor="birth_date" className="form-label">Date de naissance</label>
           <input
-            type="text"
-            id="floating_company"
+            type="date"
+            id="birth_date"
             className="form-input"
-            placeholder="Nom de l'entreprise"
-            value={company}
-            onChange={(e) => setCompany(e.target.value)}
+            max={maxDate}
+            value={birthDate}
+            onChange={(e) => setBirthDate(e.target.value)}
             required
           />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="gender" className="form-label">Sexe</label>
+          <select
+            id="gender"
+            className="form-input"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+            required
+          >
+            <option value="" disabled>Sélectionnez votre sexe</option>
+            <option value="male">Homme</option>
+            <option value="female">Femme</option>
+          </select>
         </div>
 
         <button type="submit" className="submit-button">Soumettre</button>
